@@ -54,3 +54,7 @@ $docker exec -it mysql-dev-server mysql -uroot -proot
 mysql> create database db_example; -- Creates the new database
 mysql> create user 'springuser'@'%' identified by 'ThePassword'; -- Creates the user
 mysql> grant all on db_example.* to 'springuser'@'%'; -- Gives all privileges to the new user on the newly created database
+
+
+$ docker run -it --network some-network --rm mysql mysql -hsome-mysql -uroot -proot
+
