@@ -22,3 +22,35 @@ MYSQL_USER=test
 MYSQL_PASSWORD=test
 
 These options are self explanatory. ‘-d’ tells the docker to run the container in background.
+
+$docker run --name=mysql-dev-server -e MYSQL_ROOT_PASSWORD=root -e MYSQL_USER=test -e MYSQL_PASSWORD=test -e MYSQL_DATABASE=testdb -d mysql
+
+#Step 3: Then check the status of the container by issuing, ‘docker ps -a’ command
+
+$docker ps -a
+
+#Step 4: Find the IP of the container using following. Check out the “IPAddress” from the output, this will tell you the ip address.
+
+$docker inspect mysql-dev-server
+#Step 5: You can check the logs of the running container use the following command
+
+$docker logs mysql-dev-server
+
+******************Accessing MYSQL database through WEB Interface (phpMyAdmin)********************
+Step 1: In order to link the MYSQL container to phpMyAdmin , you need to fire below docker command –
+
+$docker pull phpmyadmin/phpmyadmin
+$docker run --name myphpadmin -d --link mysql-dev-server:db -p 8080:80 phpmyadmin/phpmyadmin
+
+Step 2: Access the MYSQL database from phpMyAdmin
+
+Now you can connect to this MYSQL database docker container from phpmyadmin . 
+This will show up below page once you hit the URL (http://192.168.99.100:8080)
+
+*************Connecting to MySQL Server from within the Container*************
+$docker exec -it mysql-dev-server mysql -uroot -proot
+
+**************To create a new database, run the following commands at the mysql prompt:******
+mysql> create database db_example; -- Creates the new database
+mysql> create user 'springuser'@'%' identified by 'ThePassword'; -- Creates the user
+mysql> grant all on db_example.* to 'springuser'@'%'; -- Gives all privileges to the new user on the newly created database
