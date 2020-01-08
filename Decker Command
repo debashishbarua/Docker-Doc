@@ -1,0 +1,24 @@
+#Basic Commands
+docker -v
+docker images
+docker ps
+docker ps -a
+
+#Connecting to MYSQL docker container#
+
+#Step 1 : Pull MySql image from docker hub. Following command will pull the MYSQL version 5.6 image.
+$docker pull mysql:5.6
+##For latest
+$docker pull mysql
+
+#Step 2: Run a container from this image. ‘-name’ gives a name to the container. ‘ -e’ specifies run time variables you need to set. Set the runtime variables for the MySQL container-
+
+MYSQL_ROOT_PASSWORD=root
+
+MYSQL_DATABASE=testdb
+
+MYSQL_USER=test
+
+MYSQL_PASSWORD=test
+
+These options are self explanatory. ‘-d’ tells the docker to run the container in background.
